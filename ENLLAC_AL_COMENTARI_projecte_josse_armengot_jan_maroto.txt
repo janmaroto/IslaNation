@@ -1,0 +1,2 @@
+Enllaç el repositori del projecte, amb la documentació, i enllaços al BluePrint de la API, i el BackLog:
+https://github.com/janmaroto/IslaNation

@@ -72,7 +72,7 @@ El Back Office tracta i processa les peticions dels usuaris per a donar-se d’a
 
 **Illes**
 
-- ID intern de l’illa.
+- Id de l’illa.
 
 - Nom de l’illa.
 
@@ -80,42 +80,39 @@ El Back Office tracta i processa les peticions dels usuaris per a donar-se d’a
 
 - Localització de l’illa.
 
-  - Coordenades.
-     - Longitud.
-     - Latitud.
-   - País on es troba.
+   - Longitud.
+   - Latitud.
+   - País.
 
-- Població de l’illa.
+- Data de publicació de l'anunci.
 
 - Fotografies de l’illa (tres com a màxim).
 
-- Preu en euros.
-
 - Bandera de l’illa.
 
-- Nom de l’usuari que l’oferta.
+- Preu en euros.
 
-- Data de publicació.
+- Propietari.
 
 - Descripció breu de l’illa.
 
-- Visites.
+- Visites a l'anunci.
 
 **Usuaris**
 
-- ID intern de l’usuari.
+- Id de l’usuari.
 
 - Nom d’usuari.
 
-- Correu electrònic de l’usuari.
+- Correu electrònic.
 
-- Contrasenya del compte.
+- Contrasenya.
 
 - Foto de perfil.
 
 Tots els camps serán modificables per l’usuari, a excepció de:
 
-- ID usuari / ID illa.
+- Id usuari / illa.
 - Usuari propietari de l'illa.
 - Data de publicació de l'illa.
 - Visites de l'illa.

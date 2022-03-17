@@ -1,7 +1,7 @@
 import { Storage } from "@capacitor/storage";
 
 export async function setStorage(key: string, value: any): Promise<void> {
-    await Storage.set({ key: key, value: JSON.stringify(value) });
+    Storage.set({ key: key, value: JSON.stringify(value) });
 }
 
 export async function getStorage(key: string): Promise<any> {

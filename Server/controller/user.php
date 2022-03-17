@@ -8,6 +8,7 @@ class User {
 
     function __construct($params, $body) {
         $method = array_shift($params);
+        $x_api_key = array_shift($params);
         switch ($method){
             case "GET":
                 $this->getUser($params);
@@ -25,12 +26,14 @@ class User {
     }
     private function getUser($params){
         $model = new User_model();
-        if (count($params) == 0){
-            $peliculas = $model->getPelis();
-        $user = $model->getUserData($params[0]);
-        $user = $model->getAllUserData($params[0]);
+        if (count($params) == 1){
+            $user = $model->getUserData($params);
+        } else {
+            $user = $model->getFullUserData($params, $x_api_key);
+        }
         require_once("./vista/user_vista.php");
     }
+
     
     
 }

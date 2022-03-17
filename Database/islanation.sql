@@ -43,9 +43,8 @@ CREATE TABLE `users` (
 
 CREATE TABLE `uuids` (
   `uuid` int(64) NOT NULL,
-  `user` int(11) NOT NULL,
-  `expiry` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `user` int(11) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables

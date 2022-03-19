@@ -1,32 +1,35 @@
 <?php
 class Login_model {
-    private $registeredUser;
+    private $db;
+    private $userLogin;
 
     function __construct() {
-        require_once("../settings/connection.php");
+        require_once("./settings/connection.php");
         $this->db=Connection::connect();
-        $this->registeredUser=array();
+        $this->userLogin=array();
 
     }
-    private function checkUser($params){
+    public function checkUser($body){
         $user = "john";
         $pass = "jhonpass";
-        $sql = "SELECT username, userid FROM users WHERE (username = " . $user . " OR useremail = " . $user . ") AND password = " . $pass;
-        $rs = $this->db->query($sql);
-        while ($row=$rs->fetch(PDO::FETCH_ASSOC)){
-            array_unshift($this->registeredUser->username, $row[0]);
-            array_unshift($this->registeredUser->userid, $row[1]);
+        $sql = $this->db->prepare('SELECT username, id FROM users WHERE (username = :user OR email = :user) AND pwd_hash = :pass');
+        $sql->bindParam(':user', $user);
+        $sql->bindParam(':pass', $pass);
+        $sql->execute();
+        while ($row=$sql->fetch()){
+            array_unshift($this->userLogin->username, $row['username']);
+            array_unshift($this->userLogin->id, $row['id']);
         }
-        if (count($this->registeredUser) == 1) {
+        if (count($this->userLogin) == 1) {
             $this->uuid = generateUuid();
             $sql_i = "INSERT INTO uuids VALUES(:uuid, :user);";
             $data = [
-                'uuid'=> $this->registeredUser->uuid,
-                'user'=>$registeredUser->userid
+                'uuid'=> $this->userLogin->uuid,
+                'user'=>$this->$userLogin->id
             ];
             $rs_i = $this->db->prepare($sql_i)->execute($data);
         }
-        return $this->registeredUser;
+        return $this->userLogin;
     }
 
     static function generateUuid($data = null) {

@@ -12,8 +12,8 @@ class Login_model {
 
     }
     public function checkUser($body){
-        $user = "john";
-        $pass = "johnpass";
+        $user = $body->user;
+        $pass = $body->pass;
         $sql = $this->db->prepare('SELECT username, id FROM users WHERE (username = :user OR email = :user) AND pwd_hash = :pass');
         $sql->bindParam(':user', $user);
         $sql->bindParam(':pass', $pass);

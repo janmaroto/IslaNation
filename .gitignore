@@ -1,3 +1,4 @@
 #Ionic bs
 /Client/*
 !/Client/src
+/Server/tester.php

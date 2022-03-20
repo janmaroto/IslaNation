@@ -17,9 +17,13 @@ export class LoginPage implements OnInit {
   password
 
   userLogin() {
-    var data = new FormData();
-    data.append("user", this.username);
-    data.append("pass", this.password);
+    // var data = new FormData();
+    // data.append("user", this.username);
+    // data.append("pass", this.password);
+    var data = {
+      "user": this.username,
+      "pass": this.password
+    };
     this._apiService.userLogin(data).subscribe((response) => {
       console.log(response);
     });

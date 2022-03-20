@@ -34,7 +34,7 @@ class Login_model {
             ];
             $rs_i = $this->db->prepare($sql_i)->execute($data);
         } else {
-            $this->userLogin->message = "Username or password are incorrect!";
+            $this->userLogin->message = "Username or password are incorrect!" . $user . $pass . $body;
         }
         return $this->userLogin;
     } 

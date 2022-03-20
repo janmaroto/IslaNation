@@ -1,4 +1,5 @@
 #Ionic bs
-/Client/*
-!/Client/src
-/Server/tester.php
+Client/*
+!Client/src
+Server/tester.php
+Server/tezter.html

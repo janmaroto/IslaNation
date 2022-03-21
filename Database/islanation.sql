@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 12, 2022 at 05:19 PM
+-- Generation Time: Mar 21, 2022 at 06:04 PM
 -- Server version: 10.5.12-MariaDB-0+deb11u1
 -- PHP Version: 8.1.3
 
@@ -35,6 +35,13 @@ CREATE TABLE `users` (
   `avatar` varchar(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `pwd_hash`, `email`, `avatar`) VALUES
+(1, 'john', 'johnpass', '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -42,9 +49,9 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `uuids` (
-  `uuid` int(64) NOT NULL,
+  `uuid` char(36) NOT NULL,
   `user` int(11) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -57,6 +64,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `uuids`
+--
+ALTER TABLE `uuids`
+  ADD KEY `user` (`user`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -64,7 +77,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `uuids`
+--
+ALTER TABLE `uuids`
+  ADD CONSTRAINT `uuids_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

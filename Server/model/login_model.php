@@ -26,7 +26,7 @@ class Login_model {
         }
         if ($this->correct) {
             $this->userLogin->uuid = generateUuid();
-            $this->userLogin->message = "succes";
+            $this->userLogin->message = "success";
             $sql_i = "INSERT INTO uuids VALUES(:uuid, :user);";
             $data = [
                 'uuid'=> $this->userLogin->uuid,
@@ -34,7 +34,7 @@ class Login_model {
             ];
             $rs_i = $this->db->prepare($sql_i)->execute($data);
         } else {
-            $this->userLogin->message = "Username or password are incorrect!" . $user . $pass . $body;
+            $this->userLogin->message = "Username or password are incorrect!";
         }
         return $this->userLogin;
     } 

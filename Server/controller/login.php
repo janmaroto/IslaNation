@@ -10,9 +10,6 @@ class Login {
         $login = $model->checkUser($body);
         require_once("./view/login_view.php");
     }
-
-    
-    
 }
 
 ?>

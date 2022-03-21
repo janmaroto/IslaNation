@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `islanation`
 --
+DROP DATABASE IF EXISTS islanation;
+CREATE DATABASE islanation;
+USE islanation;
 
 -- --------------------------------------------------------
 

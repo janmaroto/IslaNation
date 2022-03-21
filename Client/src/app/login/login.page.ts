@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -14,7 +13,8 @@ export class LoginPage implements OnInit {
   ) { }
 
   username;
-  password
+  password;
+  result;
 
   userLogin() {
     // var data = new FormData();
@@ -24,9 +24,15 @@ export class LoginPage implements OnInit {
       "user": this.username,
       "pass": this.password
     };
+    var result;
     this._apiService.userLogin(data).subscribe((response) => {
+      result = response;
       console.log(response);
     });
+    this.result = result;
+    console.log(this.result);
+
+    // window.location.replace("/home");
 
   }
 
@@ -34,3 +40,8 @@ export class LoginPage implements OnInit {
   }
 
 }
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    document.getElementById('submit-button').click();
+  }
+})

@@ -2,7 +2,6 @@
 class Login_model {
     private $db;
     private $userLogin;
-    private $correct;
 
     function __construct() {
         require_once("./settings/connection.php");
@@ -14,7 +13,7 @@ class Login_model {
     public function checkUser($body){
         $user = $body->user;
         $pass = $body->pass;
-        $sql = $this->db->prepare('SELECT username, id FROM users WHERE (username = :user OR email = :user) AND pwd_hash = :pass');
+        $sql = $this->db->prepare('SELECT username, id, pwd_hash FROM users WHERE (username = :user OR email = :user)');
         $sql->bindParam(':user', $user);
         $sql->bindParam(':pass', $pass);
         $sql->execute();
@@ -22,20 +21,23 @@ class Login_model {
         while ($row=$sql->fetch()){
             $this->userLogin->username = $row['username'];
             $this->userLogin->id = $row['id'];
-            $this->correct = true;
+            $hashPass = $row['pwd_hash'];
+            if (password_verify($pass,$hashPass)) {
+
+                $this->userLogin->uuid = generateUuid();
+                $this->userLogin->message = "success";
+                $sql_i = "INSERT INTO uuids VALUES(:uuid, :user);";
+                $data = [
+                    'uuid'=> $this->userLogin->uuid,
+                    'user'=>$this->userLogin->id
+                ];
+                $rs_i = $this->db->prepare($sql_i)->execute($data);
+                
+            } else {
+                $this->userLogin->message = "Username or password are incorrect!";
+            }
         }
-        if ($this->correct) {
-            $this->userLogin->uuid = generateUuid();
-            $this->userLogin->message = "success";
-            $sql_i = "INSERT INTO uuids VALUES(:uuid, :user);";
-            $data = [
-                'uuid'=> $this->userLogin->uuid,
-                'user'=>$this->userLogin->id
-            ];
-            $rs_i = $this->db->prepare($sql_i)->execute($data);
-        } else {
-            $this->userLogin->message = "Username or password are incorrect!";
-        }
+        
         return $this->userLogin;
     } 
     

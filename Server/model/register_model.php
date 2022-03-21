@@ -13,18 +13,23 @@ class Register_model {
     public function registerUser($body){
         $user = $body->user;
         $mail = $body->mail;
-        $pass = $body->pass;
-        $sql = $this->db->prepare('INSERT INTO users VALUES (null,:user,:mail,:pass, "null")');
+        $pass = password_hash($body->pass, PASSWORD_DEFAULT);
+        $sql = $this->db->prepare('INSERT INTO users VALUES (null,:user,:pass,:mail, "null")');
         $sql->bindParam(':user', $user);
         $sql->bindParam(':mail', $mail);
         $sql->bindParam(':pass', $pass);
         if ($sql->execute()) {
-            $this->userRegistration->id = $db->lastInsertId();
-            
-            $sql_i = "SELECT * FROM users WHERE id=".$this->userRegistration->id.";";
-            $rs_i = $this->db->prepare($sql_i)->execute();
+            $this->userRegistration->id = $this->db->lastInsertId();echo $this->userRegistration->id;
+            $sql_i = $this->db->prepare('SELECT * FROM users WHERE id=' . $this->userRegistration->id . ';');
+            $sql_i->execute();
+            while ($row=$sql_i->fetch()){
+                $this->userRegistration->username = $row['username'];
+                $this->userRegistration->mail = $row['email'];
+                $this->userRegistration->pic = $row['avatar'];
+            }
+            print_r($this->userRegistration);
             $this->userRegistration->user = "assa";
-        } else {echo $mail;
+        } else {
             $this->userRegistration->message = "Username or password are incorrect!";
         }
         return $this->userRegistration;

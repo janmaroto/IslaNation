@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { getStorage } from 'src/services/storage';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,20 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  uuid;
+
+  constructor() {
+
+    console.log("--" + getStorage('uuid'));
+    this.getDataStorage();
+
+  }
+
+
+  async getDataStorage(){
+    this.uuid = await getStorage('uuid');
+    console.log("---------->" + this.uuid);
+}
+
 
 }

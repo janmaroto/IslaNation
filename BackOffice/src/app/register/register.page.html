@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="bigButtonDiv">
+      <ion-title>Register</ion-title> 
+        <ion-button style="text-transform:none; margin-right: 4px;" size="small" color="success" routerLink="/login">Login</ion-button>
+        <ion-button style="text-transform:none; margin-left: 4px;" size="small" color="success" routerLink="/home">Home</ion-button>
+      </div> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-label for="username">Username</ion-label><br>
+  <ion-input [(ngModel)]="username" type="text"></ion-input><br><br>
+
+  <ion-label for="email">Email</ion-label><br>
+  <ion-input [(ngModel)]="email" type="text"></ion-input><br><br>
+  
+  <ion-label for="password">Password</ion-label><br>
+  <ion-input [(ngModel)]="password" type="text"></ion-input><br><br>
+  <ion-button id="submit-button" type="button" (click)="userRegister()">Login</ion-button>
+
+
+</ion-content>

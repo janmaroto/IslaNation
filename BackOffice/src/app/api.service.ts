@@ -14,4 +14,7 @@ export class ApiService {
   userLogin(data) {
     return this.http.post('http://islanation.local/login', data);
   }
+  userRegister(data) {
+    return this.http.post('http://islanation.local/register', data);
+  }
 }

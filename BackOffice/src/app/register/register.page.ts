@@ -6,11 +6,11 @@ import { getStorage, setStorage } from '../../services/storage';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class RegisterPage implements OnInit {
 
   constructor(
     public  _apiService: ApiService,
@@ -19,24 +19,23 @@ export class LoginPage implements OnInit {
 
   username;
   password;
+  email;
   
 
-  userLogin() {
+  userRegister() {
     var data = {
       "user": this.username,
-      "pass": this.password
+      "pass": this.password,
+      "email": this.email
     };
 
-    this._apiService.userLogin(data).subscribe((response) => {
+    this._apiService.userRegister(data).subscribe((response) => {
       console.log(response);
-      setStorage('uuid', response['uuid']);
       setStorage('id', response['id']);
       setStorage('username', response['username']);
       setStorage('email', response['email']);
-
-      console.log(getStorage('uuid'));
     
-      this.router.navigate(['/home'])
+      this.router.navigate(['/login'])
     });
 
     console.log("hola");

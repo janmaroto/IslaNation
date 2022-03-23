@@ -12,11 +12,11 @@ class Register_model {
     }
     public function registerUser($body){
         $user = $body->user;
-        $mail = $body->mail;
-        $pass = password_hash($body->pass, PASSWORD_DEFAULT);
-        $sql = $this->db->prepare('INSERT INTO users VALUES (null,:user,:pass,:mail, "null")');
+        $email = $body->email;
+        $pass = $body->pass;
+        $sql = $this->db->prepare('INSERT INTO users VALUES (null,:user,:pass,:email, "null")');
         $sql->bindParam(':user', $user);
-        $sql->bindParam(':mail', $mail);
+        $sql->bindParam(':email', $email);
         $sql->bindParam(':pass', $pass);
         if ($sql->execute()) {
             $this->userRegistration->id = $this->db->lastInsertId();echo $this->userRegistration->id;
@@ -24,7 +24,7 @@ class Register_model {
             $sql_i->execute();
             while ($row=$sql_i->fetch()){
                 $this->userRegistration->username = $row['username'];
-                $this->userRegistration->mail = $row['email'];
+                $this->userRegistration->email = $row['email'];
                 $this->userRegistration->pic = $row['avatar'];
             }
             print_r($this->userRegistration);

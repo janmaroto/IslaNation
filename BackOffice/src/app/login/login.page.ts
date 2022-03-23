@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
+import { Router } from '@angular/router';
+import { getStorage, setStorage } from '../../services/storage';
+
+
 
 @Component({
   selector: 'app-login',
@@ -9,32 +13,31 @@ import { ApiService } from 'src/app/api.service';
 export class LoginPage implements OnInit {
 
   constructor(
-    public  _apiService: ApiService
+    public  _apiService: ApiService,
+    private router: Router
   ) { }
 
   username;
   password;
-  result;
+
 
   userLogin() {
-    // var data = new FormData();
-    // data.append("user", this.username);
-    // data.append("pass", this.password);
     var data = {
       "user": this.username,
       "pass": this.password
     };
-    var result;
-    this._apiService.userLogin(data).subscribe((response) => {
-      result = response;
-      console.log(response);
-    });
-    this.result = result;
-    console.log(this.result);
 
-    // window.location.replace("/home");
+    this._apiService.userLogin(data).subscribe((response) => {
+      console.log(response);
+      setStorage('uuid', response['uuid']);
+    });
+    console.log(getStorage('uuid'));
+    
+    this.router.navigate(['/home'])
 
   }
+
+  
 
   ngOnInit() {
   }

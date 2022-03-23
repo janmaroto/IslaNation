@@ -1,5 +1,7 @@
 #Ionic bs
-Client/*
-!Client/src
+BackOffice/*
+FrontOffice/*
+!FrontOffice/src
+!BackOffice/src
 Server/tester.php
 Server/tezter.html

@@ -13,25 +13,24 @@ class Register_model {
     public function registerUser($body){
         $user = $body->user;
         $email = $body->email;
-        $pass = $body->pass;
-        $sql = $this->db->prepare('INSERT INTO users VALUES (null,:user,:pass,:email, "null")');
+        $pass = password_hash($body->pass, PASSWORD_DEFAULT);
+        $avatar = 'default.jpg';
+        $sql = $this->db->prepare('INSERT INTO users VALUES (null,:user,:pass,:email,:avatar)');
         $sql->bindParam(':user', $user);
         $sql->bindParam(':email', $email);
         $sql->bindParam(':pass', $pass);
+        $sql->bindParam(':avatar', $avatar);
         if ($sql->execute()) {
-            $this->userRegistration->id = $this->db->lastInsertId();echo $this->userRegistration->id;
-            $sql_i = $this->db->prepare('SELECT * FROM users WHERE id=' . $this->userRegistration->id . ';');
-            $sql_i->execute();
-            while ($row=$sql_i->fetch()){
-                $this->userRegistration->username = $row['username'];
-                $this->userRegistration->email = $row['email'];
-                $this->userRegistration->pic = $row['avatar'];
-            }
-            print_r($this->userRegistration);
-            $this->userRegistration->user = "assa";
-        } else {
-            $this->userRegistration->message = "Username or password are incorrect!";
+            $this->userRegistration->id = $this->db->lastInsertId();
+            $this->userRegistration->username = $user;
+            $this->userRegistration->email = $email;
+            $this->userRegistration->avatar = $avatar;
+            $this->userRegistration->message = "success";
+
+            return $this->userRegistration;
+
         }
+        $this->userRegistration->message = "error!";
         return $this->userRegistration;
     } 
     

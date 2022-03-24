@@ -1,40 +1,41 @@
 <?php
+require_once("./model/user_model.php");
 class User {
-    private $user_id;
-    private $user_name;
-    private $user_pwd_hash;
-    private $user_email;
-    private $user_avatar;
 
     function __construct($params, $body) {
-        $method = array_shift($params);
         $x_api_key = array_shift($params);
-        switch ($method){
+        $method = array_shift($params);
+        switch ($method) {
             case "GET":
                 $this->getUser($params);
                 break;
             case "PUT":
-                $this->updateUser($params, $body);
+                $this->putUser($params, $x_api_key, $body);
                 break;
             case "DELETE":
-                $this->deleteUser($params);
+                $this->deleteUser($params, $x_api_key);
                 break;
             default:
-                $this->notImplementedMethodUser($params, $body, $method);
+                $this->notImplementedMethodPelicula($params, $body, $method);
                 break;
         }
     }
+    
     private function getUser($params){
         $model = new User_model();
-        if (count($params) == 1){
-            $user = $model->getUserData($params);
-        } else {
-            $user = $model->getFullUserData($params, $x_api_key);
-        }
-        require_once("./vista/user_vista.php");
+        $user = $model->retrieveUser($params);
+        require_once("./view/user_view.php");
     }
-
-    
+    private function putUser($params, $x_api_key, $body){
+        $model = new User_model();
+        $user = $model->editUser($params);
+        require_once("./view/user_view.php");
+    }
+    private function deleteUser($params, $x_api_key){
+        $model = new User_model();
+        $user = $model->removeUser($params, $x_api_key);
+        require_once("./view/user_view.php");
+    }
     
 }
 

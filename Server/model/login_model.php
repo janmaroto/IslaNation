@@ -23,7 +23,6 @@ class Login_model {
             $this->userLogin->id = $row['id'];
             $hashPass = $row['pwd_hash'];
             if (password_verify($pass,$hashPass)) {
-
                 $this->userLogin->uuid = generateUuid();
                 $this->userLogin->message = "success";
                 $sql_i = "INSERT INTO uuids VALUES(:uuid, :user);";

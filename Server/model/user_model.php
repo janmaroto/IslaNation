@@ -22,11 +22,16 @@ class User_model {
     }
     public function removeUser($params, $x_api_key) {
         $user = array_shift($params);
-        $sql = $this->db->prepare('DELETE FROM users WHERE id = :id');
-        $sql->bindParam(':id', $user);
-        $sql->execute();
-        $this->user->id = $row['id'];
-        return $this->user;  
+        $sql = $this->db->prepare("DELETE FROM uuids WHERE user = $user");
+        $sql_i = $this->db->prepare("DELETE FROM users WHERE id = $user");
+        if ($sql->execute()) {
+            if ($sql_i->execute()) {
+                $this->user->message =  "user " . $user . " deleted successfully";
+                return $this->user;  
+            }
+        }
+        $this->user->message =  "error deleting user " . $user;
+            return $this->user;  
     }
     
     

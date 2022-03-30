@@ -91,6 +91,47 @@ ALTER TABLE `users`
 --
 ALTER TABLE `uuids`
   ADD CONSTRAINT `uuids_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
+
+
+CREATE TABLE `isles` (
+  `id` int(10) NOT NULL,
+  `name` varchar(10) NOT NULL,
+  `description` text NOT NULL,
+  `area` int(10) NOT NULL,
+  `latitude` bigint(30) NOT NULL,
+  `longitude` bigint(30) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `population` int(20) NOT NULL,
+  `images` varchar(50) NOT NULL,
+  `flag` varchar(50) NOT NULL,
+  `price` int(20) NOT NULL,
+  `owner_id` int(10) NOT NULL,
+  `add_date` date NOT NULL,
+  `visits` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `isles`
+--
+ALTER TABLE `isles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `isles`
+--
+ALTER TABLE `isles`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `isles`
+  ADD CONSTRAINT `isles_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

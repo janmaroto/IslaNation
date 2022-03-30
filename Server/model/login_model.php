@@ -7,8 +7,6 @@ class Login_model {
         require_once("./settings/connection.php");
         $this->db=Connection::connect();
         $this->userLogin=new stdClass();
-        $this->correct = false;
-
     }
     public function checkUser($body){
         $user = $body->user;

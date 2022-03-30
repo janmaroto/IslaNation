@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import { Router } from '@angular/router';
-import { getStorage, setStorage } from '../../services/storage';
+import { getStorage, removeStorage, setStorage } from '../../services/storage';
 
 
 
@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
 
   username;
   password;
-
+  uuid;
 
   userLogin() {
     var data = {
@@ -31,12 +31,14 @@ export class LoginPage implements OnInit {
       console.log(response);
       setStorage('uuid', response['uuid']);
     });
-    console.log(getStorage('uuid'));
-    
-    this.router.navigate(['/home'])
+
+    //this.router.navigate(['/home'])
 
   }
-
+  async getDataStorage(){
+    this.uuid = await getStorage('uuid');
+    console.log(this.uuid);
+}
   
 
   ngOnInit() {

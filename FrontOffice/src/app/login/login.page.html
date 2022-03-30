@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Login</ion-title>
+    <ion-button id="submit-button" type="button" routerLink="/home">Home</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -13,6 +14,7 @@
   <ion-label for="password">Password</ion-label><br>
   <ion-input [(ngModel)]="password" type="text"></ion-input><br><br>
   <ion-button id="submit-button" type="button" (click)="userLogin()">Login</ion-button>
+  <ion-button id="submit-button" type="button" (click)="getDataStorage()">Get</ion-button>
 
 
 </ion-content>

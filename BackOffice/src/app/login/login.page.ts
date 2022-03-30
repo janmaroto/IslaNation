@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/home'])
     });
 
-    console.log("hola");
+    // console.log("hola");
 
   }
 

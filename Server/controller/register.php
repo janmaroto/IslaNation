@@ -8,7 +8,7 @@ class Register {
     private function userRegistration($body){
         $model = new Register_model();
         $register = $model->registerUser($body);
-        require_once("./model/register_view.php");
+        require_once("./view/register_view.php");
     }
     
 }

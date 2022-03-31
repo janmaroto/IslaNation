@@ -1,0 +1,51 @@
+ion-label {
+    letter-spacing: 0.5px;
+    text-indent: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+ion-input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  ion-content {
+    --padding-end	: 25px;
+    --padding-start	: 25px;
+    --padding-top	: 25px;
+  }
+  
+  #submit-button {
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+
+  .bigButtonDiv {
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.buttonDiv {
+    width: 375px;
+    max-width: 45%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px, 0px;
+    border-radius: 4px;
+    cursor: pointer;
+}

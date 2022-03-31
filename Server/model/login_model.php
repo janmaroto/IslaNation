@@ -11,13 +11,13 @@ class Login_model {
     public function checkUser($body){
         $user = $body->user;
         $pass = $body->pass;
-        $sql = $this->db->prepare('SELECT nickname, id, pwd_hash FROM users WHERE (username = :user OR email = :user)');
+        $sql = $this->db->prepare('SELECT nickname, id, pwd_hash FROM users WHERE (nickname = :user OR email = :user)');
         $sql->bindParam(':user', $user);
         $sql->bindParam(':pass', $pass);
         $sql->execute();
 
         while ($row=$sql->fetch()){
-            $this->userLogin->username = $row['username'];
+            $this->userLogin->username = $row['nickname'];
             $this->userLogin->id = $row['id'];
             $hashPass = $row['pwd_hash'];
             if (password_verify($pass,$hashPass)) {

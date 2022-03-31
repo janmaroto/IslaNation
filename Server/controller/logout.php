@@ -6,7 +6,7 @@
             $x_api_key = array_shift($params);
             $method = array_shift($params);
             switch ($method) {
-                case "DELETE":return "hithere";
+                case "DELETE":
                     $logout = $model->logOut($body);
                     require_once("./view/logout_view.php");
                     break;

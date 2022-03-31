@@ -37,11 +37,6 @@ class Login_model {
         
         return $this->userLogin;
     } 
-    public function logOut($body) {
-
-        print_r($body);
-
-    } 
 }
 function generateUuid() {
     // Generate 16 bytes (128 bits) of random data or use the data passed into the function.

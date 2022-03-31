@@ -28,17 +28,12 @@ export class RegisterPage implements OnInit {
       "pass": this.password,
       "email": this.email
     };
-
+    console.log(data);
     this._apiService.userRegister(data).subscribe((response) => {
-      console.log(response);
-      setStorage('id', response['id']);
-      setStorage('username', response['username']);
-      setStorage('email', response['email']);
+      // console.log(response);
     
-      this.router.navigate(['/login'])
+      // this.router.navigate(['/login'])
     });
-
-    console.log("hola");
 
   }
 
@@ -48,8 +43,8 @@ export class RegisterPage implements OnInit {
   }
 
 }
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    document.getElementById('submit-button').click();
-  }
-})
+// document.addEventListener('keydown', (e) => {
+//   if (e.key === 'Enter') {
+//     document.getElementById('submit-button').click();
+//   }
+// })

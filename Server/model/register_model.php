@@ -22,7 +22,7 @@ class Register_model {
         $sql->bindParam(':avatar', $avatar);
         if ($sql->execute()) {
             $this->userRegistration->id = $id;
-            $this->userRegistration->username = $user;
+            $this->userRegistration->nickname = $user;
             $this->userRegistration->email = $email;
             $this->userRegistration->avatar = $avatar;
             $this->userRegistration->message = "success";

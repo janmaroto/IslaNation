@@ -1,0 +1,10 @@
+## Curls del Jan
+## /login
+curl -X POST http://islanation.local/login --data-raw '{"user": "james", "pass": "jamespass"}'
+curl -X POST http://islanation.local/login --data-raw '{"user": "jose", "pass": "josepass"}'
+
+## /register
+curl -X POST http://islanation.local/register --data-raw '{"user": "james", "email": "james@james.james", "pass": "jamespass"}'
+curl -X POST http://islanation.local/register --data-raw '{"user": "joshuas", "email": "jos", "pass": "joshuapass"}'
+
+## Curls del Jose

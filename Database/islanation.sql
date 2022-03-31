@@ -31,19 +31,12 @@ USE islanation;
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(32) NOT NULL,
+  `id` char(10) NOT NULL,
+  `nickname` varchar(32) NOT NULL,
   `pwd_hash` varchar(64) NOT NULL,
   `email` varchar(32) NOT NULL,
   `avatar` varchar(22) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `pwd_hash`, `email`, `avatar`) VALUES
-(1, 'john', 'johnpass', '', '');
 
 -- --------------------------------------------------------
 
@@ -53,7 +46,7 @@ INSERT INTO `users` (`id`, `username`, `pwd_hash`, `email`, `avatar`) VALUES
 
 CREATE TABLE `uuids` (
   `uuid` char(36) NOT NULL,
-  `user` int(11) NOT NULL
+  `user` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -77,23 +70,13 @@ ALTER TABLE `uuids`
 --
 
 --
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Constraints for dumped tables
---
-
---
 -- Constraints for table `uuids`
 --
 ALTER TABLE `uuids`
   ADD CONSTRAINT `uuids_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
 
 
-CREATE TABLE `isles` (
+CREATE TABLE `islands` (
   `id` int(10) NOT NULL,
   `name` varchar(10) NOT NULL,
   `description` text NOT NULL,
@@ -105,7 +88,7 @@ CREATE TABLE `isles` (
   `images` varchar(50) NOT NULL,
   `flag` varchar(50) NOT NULL,
   `price` int(20) NOT NULL,
-  `owner_id` int(10) NOT NULL,
+  `owner_id` char(10) NOT NULL,
   `add_date` date NOT NULL,
   `visits` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -115,9 +98,9 @@ CREATE TABLE `isles` (
 --
 
 --
--- Indices de la tabla `isles`
+-- Indices de la tabla `islands`
 --
-ALTER TABLE `isles`
+ALTER TABLE `islands`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -125,13 +108,13 @@ ALTER TABLE `isles`
 --
 
 --
--- AUTO_INCREMENT de la tabla `isles`
+-- AUTO_INCREMENT de la tabla `islands`
 --
-ALTER TABLE `isles`
+ALTER TABLE `islands`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `isles`
-  ADD CONSTRAINT `isles_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`);
+ALTER TABLE `islands`
+  ADD CONSTRAINT `islands_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

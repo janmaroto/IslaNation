@@ -11,11 +11,11 @@ class User_model {
     }
     public function retrieveUser($params) {
         $user = array_shift($params);
-        $sql = $this->db->prepare('SELECT username, id, avatar FROM users WHERE username = :user');
+        $sql = $this->db->prepare('SELECT nickname, id, avatar FROM users WHERE nickname = :user');
         $sql->bindParam(':user', $user);
         $sql->execute();
         $row=$sql->fetch();
-        $this->user->username = $row['username'];
+        $this->user->username = $row['nickname'];
         $this->user->id = $row['id'];
         $this->user->avatar = $row['avatar'];
         return $this->user;  
@@ -23,12 +23,20 @@ class User_model {
     public function removeUser($params, $x_api_key) {
         $user = array_shift($params);
 
-        $sql_s = $this->db->prepare("SELECT count(*) as n FROM uuids WHERE user = :user AND uuid = :x_api_key;");
-        $sql_s->bindParam(':user', $user);
-        $sql_s->bindParam(':x_api_key', $x_api_key);
-        $sql_s->execute();
+        $sql_s1 = $this->db->prepare("SELECT id FROM users WHERE user = $user");
+        $sql_s1->execute();
+        if ($row = $sql_s1->fetch()) {
+            $this->user->message =  "user does not exist " . $user;
+            return $this->user; 
+        }
+        $id = $row['id'];
 
-        if ($sql_s->fetch()['n'] != 1) {
+        $sql_s2 = $this->db->prepare("SELECT count(*) as n FROM uuids WHERE user = :id AND uuid = :x_api_key;");
+        $sql_s2->bindParam(':id', $id);
+        $sql_s2->bindParam(':x_api_key', $x_api_key);
+        $sql_s2->execute();
+
+        if ($sql_s2->fetch()['n'] != 1) {
             $this->user->message =  "not authorized to delete user " . $user;
             return $this->user;  
     

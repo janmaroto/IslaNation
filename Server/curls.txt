@@ -11,4 +11,10 @@ curl -X POST http://islanation.local/register --data-raw '{"user": "jose", "emai
 curl -X POST http://islanation.local/register --data-raw '{"user": "joshua", "email": "joshua@joshua.joshua", "pass": "joshuapass"}'
 curl -X POST http://islanation.local/register --data-raw '{"user": "jack", "email": "jack@jack.jack", "pass": "jackpass"}'
 
+## /user
+curl -X GET http://islanation.local/user/jack
+curl -X PUT http://islanation.local/user/jack
+curl -X DELETE http://islanation.local/user/jack
+
+
 ## Curls del Jose

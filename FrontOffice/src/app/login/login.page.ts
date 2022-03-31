@@ -20,6 +20,7 @@ export class LoginPage implements OnInit {
   username;
   password;
   uuid;
+  id;
 
   userLogin() {
     var data = {
@@ -30,14 +31,21 @@ export class LoginPage implements OnInit {
     this._apiService.userLogin(data).subscribe((response) => {
       console.log(response);
       setStorage('uuid', response['uuid']);
+      setStorage('id', response['id']);
     });
 
-    //this.router.navigate(['/home'])
+    //this.router.navigate(['/home']
 
+  }
+  userLogOut() {
+    this._apiService.logOut({"id": this.id}).subscribe((response) => {
+      console.log(response);
+    });
   }
   async getDataStorage(){
     this.uuid = await getStorage('uuid');
-    console.log(this.uuid);
+    console.log(this.uuid);this.id = await getStorage('id');
+
 }
   
 

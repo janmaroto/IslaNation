@@ -15,6 +15,10 @@ export class ApiService {
     return this.http.post('http://islanation.local/login', data);
   }
 
+  logOut(data) {console.log(data);
+    return this.http.delete('http://islanation.local/logout', data);
+  }
+  
   signUp(data) {
     return this.http.post('http://islanation.local/register', data);
   }

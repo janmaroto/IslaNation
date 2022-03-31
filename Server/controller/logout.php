@@ -1,12 +1,14 @@
 <?php
-    require_once("./model/login_model.php");
-    class Login {
+    require_once("./model/logout_model.php");
+    class Logout {
         function __construct($params, $body) {
+            $model = new Logout_model();
             $x_api_key = array_shift($params);
             $method = array_shift($params);
             switch ($method) {
-                case "POST":
-                    $this->userLogin($body);
+                case "DELETE":return "hithere";
+                    $logout = $model->logOut($body);
+                    require_once("./view/logout_view.php");
                     break;
                 case "OPTIONS":
                     http_response_code(204);
@@ -15,11 +17,6 @@
                     $this->notImplementedMethod($params, $body, $method);
                     break;
             }
-        }
-        private function userLogin($body){
-            $model = new Login_model();
-            $login = $model->checkUser($body);
-            require_once("./view/login_view.php");
         }
     }
 ?>

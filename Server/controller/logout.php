@@ -14,7 +14,8 @@
                     http_response_code(204);
                     break;
                 default:
-                    $this->notImplementedMethod($params, $body, $method);
+                    //$this->notImplementedMethod($params, $body, $method);
+                    http_response_code(207);
                     break;
             }
         }

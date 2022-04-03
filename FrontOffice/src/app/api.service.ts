@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
 
   constructor(
+    
     public http: HttpClient
   ) { }
 
@@ -16,7 +17,12 @@ export class ApiService {
   }
 
   logOut(data) {console.log(data);
-    return this.http.delete('http://islanation.local/logout', data);
+    return this.http.delete('http://islanation.local/logout', {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: data,
+      });
   }
   
   signUp(data) {

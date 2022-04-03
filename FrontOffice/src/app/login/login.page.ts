@@ -44,7 +44,8 @@ export class LoginPage implements OnInit {
   }
   async getDataStorage(){
     this.uuid = await getStorage('uuid');
-    ;this.id = await getStorage('id');
+    this.id = await getStorage('id');
+    console.log(this.uuid, this.id);
 
 }
   

@@ -1,4 +1,5 @@
-<?php
+<?php 
+/*
 class Island_model {
     private $island_id;
     private $island_name;
@@ -19,9 +20,7 @@ class Island_model {
     
     
 }
-
-?>
-<?php
+*/
 class Island_model {
     private $db;
     private $island;
@@ -29,20 +28,47 @@ class Island_model {
     function __construct() {
         require_once("./settings/connection.php");
         $this->db=Connection::connect();
-        $this->user=new stdClass();
+        $this->island=new stdClass();
         $this->correct = false;
 
     }
-    public function retrieveIsland($params) {
-        $id = array_shift($params);
-        $sql = $this->db->prepare('SELECT * FROM islands WHERE id = :id');
-        $sql->bindParam(':user', $user);
+    public function retrieveIslands() {
+        $sql = $this->db->prepare('SELECT * FROM islands');
         $sql->execute();
-        $row=$sql->fetch();
-        $this->user->username = $row['nickname'];
-        $this->user->id = $row['id'];
-        $this->user->avatar = $row['avatar'];
-        return $this->user;  
+        $results = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $results;  
+    }
+    public function addIsland($body) {
+        $name = $body->name;
+        $description = $body->description;
+        $area = $body->surface;
+        $cords = $body->cords[0];
+        $country = $body->country;
+        $population = $body->population;
+        $images = $body->images;
+        $flag = $body->flag;
+        $price = $body->price;
+        $owner = $body->owner;
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+        $sql = $this->db->prepare('INSERT INTO islands VALUES(null,:name,:description,:area,:latitude,:longitude,:country,:population,:images,:flag,:price,:owner,now(),0)');
+        $sql->bindParam(':name', $name);
+        $sql->bindParam(':description', $description);
+        $sql->bindParam(':area', $area);
+        $sql->bindParam(':latitude', $cords);
+        $sql->bindParam(':longitude', $cords);
+        $sql->bindParam(':country', $country);
+        $sql->bindParam(':population', $population);
+        $sql->bindParam(':images', $images[0]);
+        $sql->bindParam(':flag', $flag);
+        $sql->bindParam(':price', $price);
+        $sql->bindParam(':owner', $owner);
+        
+        if (!$sql->execute()) {
+            print_r($sql->errorInfo());
+        }
+        echo "HIA";
+        /*$this->userRegistration->message = "error!";*/
+        return $body; 
     }
 }
 

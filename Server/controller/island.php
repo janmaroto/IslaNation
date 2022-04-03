@@ -1,13 +1,16 @@
 <?php
 require_once("./model/island_model.php");
-class User {
+class Island {
 
     function __construct($params, $body) {
         $x_api_key = array_shift($params);
         $method = array_shift($params);
         switch ($method) {
             case "GET":
-                $this->getUser($params);
+                $this->getIslands();
+                break;
+            case "POST":
+                $this->addIsland($body);
                 break;
             case "PUT":
                 $this->putUser($params, $x_api_key, $body);
@@ -16,27 +19,21 @@ class User {
                 $this->deleteUser($params, $x_api_key);
                 break;
             default:
-                $this->notImplementedMethodPelicula($params, $body, $method);
+                $this->notImplementedMethod($params, $body, $method);
                 break;
         }
     }
     
-    private function getUser($params){
-        $model = new User_model();
-        $user = $model->retrieveUser($params);
-        require_once("./view/user_view.php");
+    private function getIslands(){
+        $model = new Island_model();
+        $islands = $model->retrieveIslands();
+        require_once("./view/island_view.php");
     }
-    private function putUser($params, $x_api_key, $body){
-        $model = new User_model();
-        $user = $model->editUser($params);
-        require_once("./view/user_view.php");
+    private function addIsland($body){
+        $model = new Island_model();
+        $islands = $model->addIsland($body);
+        require_once("./view/island_view.php");
     }
-    private function deleteUser($params, $x_api_key){
-        $model = new User_model();
-        $user = $model->removeUser($params, $x_api_key);
-        require_once("./view/user_view.php");
-    }
-    
 }
 
 ?>

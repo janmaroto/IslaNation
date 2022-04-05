@@ -1,24 +1,39 @@
 <?php
-    class Island {
+require_once("./model/island_model.php");
+class Island {
 
-        private $island_id;
-        private $island_name;
-        private $island_desc;
-        private $island_area;
-        private $island_cords;
-        private $island_country;
-        private $island_pop;
-        private $island_images;
-        private $island_flag;
-        private $island_price;
-        private $island_owner_id;
-        private $island_add_date;
-        private $island_visits;
-
-        function __construct($params) {
-
+    function __construct($params, $body) {
+        $x_api_key = array_shift($params);
+        $method = array_shift($params);
+        switch ($method) {
+            case "GET":
+                $this->getIslands();
+                break;
+            case "POST":
+                $this->addIsland($body);
+                break;
+            case "PUT":
+                $this->putUser($params, $x_api_key, $body);
+                break;
+            case "DELETE":
+                $this->deleteUser($params, $x_api_key);
+                break;
+            default:
+                $this->notImplementedMethod($params, $body, $method);
+                break;
         }
-        
     }
+    
+    private function getIslands(){
+        $model = new Island_model();
+        $islands = $model->retrieveIslands();
+        require_once("./view/island_view.php");
+    }
+    private function addIsland($body){
+        $model = new Island_model();
+        $islands = $model->addIsland($body);
+        require_once("./view/island_view.php");
+    }
+}
 
 ?>

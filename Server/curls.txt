@@ -18,3 +18,6 @@ curl -X DELETE http://islanation.local/user/jack
 
 
 ## Curls del Jose
+## /island
+curl -X GET http://islanation.local/island
+curl -X POST http://islanation.local/island --data-raw '{"name": "isle22","surface(km)": 30,"description": "Some text here 24","cords": [323,311],"country": "Somename22","population": 20,"images": ["img12.png","img22.png","img32.png"],"flag": "flag4.png","price": "90000$","owned_by": "Putin2","published": "12/12/2012"}'

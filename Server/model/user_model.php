@@ -22,6 +22,7 @@ class User_model {
     }
     public function removeUser($params, $x_api_key) {
         $user = array_shift($params);
+        return $params;
 
         $sql_s1 = $this->db->prepare("SELECT id FROM users WHERE user = $user");
         $sql_s1->execute();

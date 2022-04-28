@@ -16,8 +16,7 @@ curl -X POST http://islanation.local/register --data-raw '{"user": "jack", "emai
 ## /user
 curl -X GET http://islanation.local/user/jack
 curl -X PUT http://islanation.local/user/jack
-curl -X GET http://islanation.local/user/jack
-curl -X DELETE http://islanation.local/user/jack -H 'x-api-key: "395e6d70-f3c7-4cae-84aa-d2785abac103"'
+curl -X DELETE http://islanation.local/user/jack -H "x-api-key: api_key_aqui"
 
 ## /island
 curl -X GET http://islanation.local/island

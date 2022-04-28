@@ -21,8 +21,7 @@ class Island_model {
             $key = array_shift($params);
             $value = array_shift($params);
             $value = $value . "%";
-            $sql_string = "SELECT * FROM islands WHERE " . $key . " LIKE " . "'" . $value . "'";
-            $sql = $this->db->prepare($sql_string);
+            $sql = $this->db->prepare("SELECT * FROM islands WHERE $key LIKE '$value'");
         }
         $sql->execute();
         $islands = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -31,7 +30,7 @@ class Island_model {
     public function addIsland($x_api_key, $body) {
         $name = $body->name;
         $description = $body->description;
-        $area = $body->surface;
+        $surface = $body->surface;
         $cords = $body->cords;
         $country = $body->country;
         $population = $body->population;

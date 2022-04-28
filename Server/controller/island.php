@@ -7,16 +7,16 @@ class Island {
         $method = array_shift($params);
         switch ($method) {
             case "GET":
-                $this->getIslands();
+                $this->getIslands($params);
                 break;
             case "POST":
-                $this->addIsland($body);
+                $this->postIsland($x_api_key, $body);
                 break;
             case "PUT":
-                $this->putUser($params, $x_api_key, $body);
+                $this->putIsland($params, $x_api_key, $body);
                 break;
             case "DELETE":
-                $this->deleteUser($params, $x_api_key);
+                $this->deleteIsland($params, $x_api_key);
                 break;
             default:
                 $this->notImplementedMethod($params, $body, $method);
@@ -24,14 +24,14 @@ class Island {
         }
     }
     
-    private function getIslands(){
+    private function getIslands($params){
         $model = new Island_model();
-        $islands = $model->retrieveIslands();
+        $islands = $model->retrieveIslands($params);
         require_once("./view/island_view.php");
     }
-    private function addIsland($body){
+    private function postIsland($x_api_key, $body){
         $model = new Island_model();
-        $islands = $model->addIsland($body);
+        $islands = $model->addIsland($x_api_key, $body);
         require_once("./view/island_view.php");
     }
 }

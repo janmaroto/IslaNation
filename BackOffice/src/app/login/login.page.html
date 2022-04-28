@@ -10,11 +10,15 @@
 <ion-content>
 
 
+
   <ion-label for="username">Username or email</ion-label><br>
-  <ion-input [(ngModel)]="username" type="text"></ion-input><br><br>
+  <ion-input [(ngModel)]="username" type="text"></ion-input>
+  <div class="error-container"></div><br><br>
   
   <ion-label for="password">Password</ion-label><br>
-  <ion-input [(ngModel)]="password" type="text"></ion-input><br><br>
+  <ion-input id="pass-input" [(ngModel)]="password" type="text"></ion-input>
+  <div class="error-container"></div><br><br>
+
   <ion-button id="submit-button" type="button" (click)="userLogin()">Login</ion-button>
 
 

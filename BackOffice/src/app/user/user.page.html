@@ -1,9 +1,27 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>user</ion-title>
+    <div class="bigButtonDiv">
+      <ion-title>User </ion-title> 
+        <ion-button style="text-transform:none; margin-right: 4px;" size="small" color="success" routerLink="/login">Login</ion-button>
+        <ion-button style="text-transform:none; margin-left: 4px;" size="small" color="success" routerLink="/register">Register</ion-button>
+      </div> 
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="center" [fullscreen]="true">
+  <ion-card class="ion-card-list" *ngFor="let island of islands; let i=index;">
+    <img src="../../assets/img/pics/{{island.image}}" style="width: 100%;"/>
+    <ion-card-header>
+      <ion-card-title>{{island.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      
+      <div>
+        <p>{{island.description}}</p>
+        <ion-button size="small" color="success" (click)="deleteIsland(island.id, i)">Delete</ion-button>
+      </div>
 
+    </ion-card-content>
+  </ion-card>
 </ion-content>

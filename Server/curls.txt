@@ -1,4 +1,6 @@
-## Curls del Jan
+## Curls
+
+
 ## /login
 curl -X POST http://islanation.local/login --data-raw '{"user": "james", "pass": "jamespass"}'
 curl -X POST http://islanation.local/login --data-raw '{"user": "jose", "pass": "josepass"}'
@@ -14,10 +16,11 @@ curl -X POST http://islanation.local/register --data-raw '{"user": "jack", "emai
 ## /user
 curl -X GET http://islanation.local/user/jack
 curl -X PUT http://islanation.local/user/jack
-curl -X DELETE http://islanation.local/user/jack
+curl -X GET http://islanation.local/user/jack
+curl -X DELETE http://islanation.local/user/jack -H 'x-api-key: "395e6d70-f3c7-4cae-84aa-d2785abac103"'
 
-
-## Curls del Jose
 ## /island
 curl -X GET http://islanation.local/island
+curl -X GET http://islanation.local/island/owner/129232768
+curl -X GET http://islanation.local/island/name/Green
 curl -X POST http://islanation.local/island --data-raw '{"name": "isle22","surface(km)": 30,"description": "Some text here 24","cords": [323,311],"country": "Somename22","population": 20,"images": ["img12.png","img22.png","img32.png"],"flag": "flag4.png","price": "90000$","owned_by": "Putin2","published": "12/12/2012"}'

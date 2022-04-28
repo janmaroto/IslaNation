@@ -1,26 +1,4 @@
 <?php 
-/*
-class Island_model {
-    private $island_id;
-    private $island_name;
-    private $island_desc;
-    private $island_area;
-    private $island_location; // Longitud, latitude and country.
-    private $user_email;
-    private $island_pop;
-    private $island_pics;  // All tree product pics and its flag.
-    private $island_price;
-    private $island_add_date;
-    private $island_owner;
-    private $island_visits;
-
-    function __construct($params) {
-
-    }
-    
-    
-}
-*/
 class Island_model {
     private $db;
     private $island;
@@ -32,17 +10,29 @@ class Island_model {
         $this->correct = false;
 
     }
-    public function retrieveIslands() {
-        $sql = $this->db->prepare('SELECT * FROM islands');
+    public function retrieveIslands($params) {
+        if (count($params) == 0) {
+            $error = new stdClass;
+            $error->message = "Parameter not implemented yet.";
+            return $error;
+        } elseif ($params[0] == "all") {
+            $sql = $this->db->prepare('SELECT * FROM islands');
+        } else {
+            $key = array_shift($params);
+            $value = array_shift($params);
+            $value = $value . "%";
+            $sql_string = "SELECT * FROM islands WHERE " . $key . " LIKE " . "'" . $value . "'";
+            $sql = $this->db->prepare($sql_string);
+        }
         $sql->execute();
-        $results = $sql->fetchAll(PDO::FETCH_ASSOC);
-        return $results;  
+        $islands = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $islands;  
     }
-    public function addIsland($body) {
+    public function addIsland($x_api_key, $body) {
         $name = $body->name;
         $description = $body->description;
         $area = $body->surface;
-        $cords = $body->cords[0];
+        $cords = $body->cords;
         $country = $body->country;
         $population = $body->population;
         $images = $body->images;
@@ -50,12 +40,12 @@ class Island_model {
         $price = $body->price;
         $owner = $body->owner;
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-        $sql = $this->db->prepare('INSERT INTO islands VALUES(null,:name,:description,:area,:latitude,:longitude,:country,:population,:images,:flag,:price,:owner,now(),0)');
+        $sql = $this->db->prepare('INSERT INTO islands VALUES(null,:name,:description,:surface,:latitude,:longitude,:country,:population,:images,:flag,:price,:owner,now(),0)');
         $sql->bindParam(':name', $name);
         $sql->bindParam(':description', $description);
-        $sql->bindParam(':area', $area);
-        $sql->bindParam(':latitude', $cords);
-        $sql->bindParam(':longitude', $cords);
+        $sql->bindParam(':surface', $surface);
+        $sql->bindParam(':longitude', $cords[0]);
+        $sql->bindParam(':latitude', $cords[1]);
         $sql->bindParam(':country', $country);
         $sql->bindParam(':population', $population);
         $sql->bindParam(':images', $images[0]);
@@ -66,7 +56,6 @@ class Island_model {
         if (!$sql->execute()) {
             print_r($sql->errorInfo());
         }
-        echo "HIA";
         /*$this->userRegistration->message = "error!";*/
         return $body; 
     }

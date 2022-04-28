@@ -29,17 +29,24 @@ export class LoginPage implements OnInit {
 
     this._apiService.userLogin(data).subscribe((response) => {
       console.log(response);
-      setStorage('uuid', response['uuid']);
-      setStorage('id', response['id']);
-      setStorage('username', response['username']);
-      setStorage('email', response['email']);
 
-      console.log(getStorage('uuid'));
+      if (response['uuid']) {
+        setStorage('uuid', response['uuid']);
+        setStorage('id', response['id']);
+        setStorage('username', response['username']);
+        setStorage('email', response['email']);
+        this.router.navigate(['/user'])
+
+        } else {
+          document.getElementById("pass-input").nextElementSibling.innerHTML = "Username or password are incorrect!";
+        }
+      
+
+      // console.log(getStorage('uuid'));
     
-      this.router.navigate(['/home'])
     });
 
-    // console.log("hola");
+    console.log(data);
 
   }
 

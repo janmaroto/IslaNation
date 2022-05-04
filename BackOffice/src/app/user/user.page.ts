@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { getStorage } from 'src/services/storage';
 import { ApiService } from 'src/app/api.service';
+import { Router } from '@angular/router';
+
 
 
 
@@ -12,36 +14,31 @@ import { ApiService } from 'src/app/api.service';
 })
 export class UserPage {
 
+  user;
   islands;
   userid;
   username;
 
 
   constructor(
-    private activatedRoute:ActivatedRoute,
-    public  _apiService: ApiService
+    public  _apiService: ApiService,
+    private route: ActivatedRoute,
+    private router: Router
+
 
   ) {
-    // get the data from the URL
+    this.user = this.route.snapshot.paramMap.get("user");
 
-    // this.activatedRoute.paramMap.subscribe(
-
-    //   (data) => {
-
-    //     console.log(data)
-
-    //   }
-
-    // );
-    // this.data = this.activatedRoute.snapshot.paramMap.get('xyz');
     this.getDataStorage();
+    console.log(this.username);
+
     this.showIslands();
    }
-   async showIslands() {
+   showIslands() {
       
     let data = {
       "key": "/owner",
-      "value": "/" + await getStorage("id")
+      "value": "/" + this.user
      };
 
       console.log(data);
@@ -55,7 +52,12 @@ export class UserPage {
         });
 
       });
-    // console.log(this.islands[0].image);
+  }
+
+  showIsland(island, mode) {
+    console.log(island);
+    console.log(mode);
+    this.router.navigate(['/island/' + island + '/' + mode])
 
   }
 

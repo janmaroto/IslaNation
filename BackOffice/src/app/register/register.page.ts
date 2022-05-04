@@ -30,9 +30,9 @@ export class RegisterPage implements OnInit {
     };
     console.log(data);
     this._apiService.userRegister(data).subscribe((response) => {
-      // console.log(response);
+      console.log(response);
     
-      // this.router.navigate(['/login'])
+      this.router.navigate(['/login'])
     });
 
   }

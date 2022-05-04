@@ -20,9 +20,18 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'user',
+    path: 'user/:user',
     loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
   },
+  {
+    path: 'island/:island/:mode',
+    loadChildren: () => import('./island/island.module').then( m => m.IslandPageModule)
+  },
+  {
+    path: 'island',
+    loadChildren: () => import('./island/island.module').then( m => m.IslandPageModule)
+  },
+
 ];
 
 @NgModule({

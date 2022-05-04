@@ -17,6 +17,12 @@ class Island_model {
             return $error;
         } elseif ($params[0] == "all") {
             $sql = $this->db->prepare('SELECT * FROM islands');
+        } elseif ($params[0] == "owner") {
+            $value = $params[1];
+            $sql = $this->db->prepare("SELECT id FROM users WHERE nickname = '$value'");
+            $sql->execute();
+            $value = $sql->fetch()['id'];
+            $sql = $this->db->prepare("SELECT * FROM islands WHERE owner = '$value'");
         } else {
             $key = array_shift($params);
             $value = array_shift($params);

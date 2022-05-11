@@ -5,5 +5,72 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="mode=='edit'" id="edit-view">
+    <ion-label for="islandName">Island Name:</ion-label><br>
+    <ion-input [(ngModel)]="islandName" type="text"></ion-input><br><br>
 
+    <ion-label for="islandDesc">Island Description:</ion-label><br>
+    <ion-input [(ngModel)]="islandDesc" type="textarea"></ion-input><br><br>
+
+    <ion-label for="islandContinent">Continent:</ion-label><br>
+    <ion-item>
+      <ion-select [(ngModel)]="islandContinent" interface="popover" placeholder="Select">
+        <ion-select-option value="africa">Africa</ion-select-option>
+        <ion-select-option value="antarctica">Antarctica</ion-select-option>
+        <ion-select-option value="asia">Asia</ion-select-option>
+        <ion-select-option value="europe">Europe</ion-select-option>
+        <ion-select-option value="northAmerica">North America</ion-select-option>
+        <ion-select-option value="southAmerica">South America</ion-select-option>
+        <ion-select-option value="oceania">Oceania</ion-select-option>
+      </ion-select>
+    </ion-item><br><br>
+
+    <ion-label for="islandArea">Surface Area (km2):</ion-label><br>
+    <ion-input [(ngModel)]="islandArea" type="text"></ion-input><br><br>
+    
+    <ion-label for="islandPopulation">Population</ion-label><br>
+    <ion-input [(ngModel)]="islandPopulation" type="text"></ion-input><br><br>
+  
+    <span id="cust-label">Change Images </span>
+    <ion-item>
+      <ion-label for="islandPictures">
+        <ion-button class="img-button" color="primary" type="button">1</ion-button>
+        <input style="display: none;" type="file" [(ngModel)]="islandPicture" (change)="selectedFile($event, 1)">
+      </ion-label>
+      <ion-label for="islandPictures">
+        <ion-button class="img-button" color="primary" type="button">2</ion-button>
+        <input style="display: none;" type="file" [(ngModel)]="islandPicture" (change)="selectedFile($event, 2)">
+      </ion-label>
+      <ion-label for="islandPictures">
+        <ion-button class="img-button" color="primary" type="button">2</ion-button>
+        <input style="display: none;" type="file" [(ngModel)]="islandPicture" (change)="selectedFile($event, 2)">
+      </ion-label>
+   </ion-item><br>
+
+   <ion-item>
+    <ion-button color="success" id="submit-button" type="button" (click)="editIsland()">Save Chnages</ion-button>
+    <ion-button color="danger" id="submit-button" type="button" (click)="deleteIsland()">Delete Product</ion-button>
+
+   </ion-item>
+
+  </div>
+
+
+
+  <div *ngIf="mode=='detail'"  id="detail-view">
+    <ion-card *ngIf="island!=null" class="ion-card-list">
+      <img src="../../assets/img/pics/{{island.image}}" style="width: 100%;"/>
+      <ion-card-header>
+        <ion-card-title>{{island.name}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        
+        <div id="island-content">
+          <p>{{island.description}}</p>
+          <!-- <ion-button size="small" color="success" (click)="showIsland(island.id, 'edit')">Edit</ion-button> -->
+        </div>
+  
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

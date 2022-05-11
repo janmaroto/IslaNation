@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class IslandPage implements OnInit {
   island;
+  islandId;
   mode;
 
   constructor(
@@ -19,16 +20,47 @@ export class IslandPage implements OnInit {
     private router: Router
 
   ) {
-    this.island = this.route.snapshot.paramMap.get("island");
+    this.islandId = this.route.snapshot.paramMap.get("island");
     this.mode = this.route.snapshot.paramMap.get("mode");
 
-    console.log(this.island);
+    
+
+    // console.log(this.island);
     console.log(this.mode);
 
+  }
+
+  getIslandData() {
+      
+    let data = {
+      "key": "/id",
+      "value": "/" + this.islandId
+     };
+
+      console.log(data);
+      this._apiService.showFilteredIslands(data).subscribe((response) => {
+        this.island = response[0];
+        this.island.image = JSON.parse(this.island.images)[0];
+        console.log(this.island);
+        console.log(this.island.images);
+      });
+  }
+
+  editIsland() {
+
+  }
+  
+  deleteIsland() {
+    
   }
   
 
   ngOnInit() {
+    if (this.mode == 'detail') {
+      this.getIslandData();
+    } else if (this.mode == 'edit') {
+
+    }
   }
 
 }

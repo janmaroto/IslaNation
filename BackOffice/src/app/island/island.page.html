@@ -12,38 +12,32 @@
     <ion-label for="islandDesc">Island Description:</ion-label><br>
     <ion-input [(ngModel)]="islandDesc" type="textarea"></ion-input><br><br>
 
-    <ion-label for="islandContinent">Continent:</ion-label><br>
+    <ion-label for="islandCountry">Country:</ion-label><br>
     <ion-item>
-      <ion-select [(ngModel)]="islandContinent" interface="popover" placeholder="Select">
-        <ion-select-option value="africa">Africa</ion-select-option>
-        <ion-select-option value="antarctica">Antarctica</ion-select-option>
-        <ion-select-option value="asia">Asia</ion-select-option>
-        <ion-select-option value="europe">Europe</ion-select-option>
-        <ion-select-option value="northAmerica">North America</ion-select-option>
-        <ion-select-option value="southAmerica">South America</ion-select-option>
-        <ion-select-option value="oceania">Oceania</ion-select-option>
+      <ion-select [(ngModel)]="islandCountry" interface="popover" placeholder="Select">
+        <ion-select-option *ngFor="let country of countries; let i=index;" value="{{country.name.common}}">{{country.name.common}}</ion-select-option>
       </ion-select>
     </ion-item><br><br>
 
-    <ion-label for="islandArea">Surface Area (km2):</ion-label><br>
-    <ion-input [(ngModel)]="islandArea" type="text"></ion-input><br><br>
+    <ion-label for="islandSurface">Surface Area (H):</ion-label><br>
+    <ion-input [(ngModel)]="islandSurface" type="text"></ion-input><br><br>
     
     <ion-label for="islandPopulation">Population</ion-label><br>
     <ion-input [(ngModel)]="islandPopulation" type="text"></ion-input><br><br>
   
-    <span id="cust-label">Change Images </span>
+    <span id="cust-label">Images </span>
     <ion-item>
       <ion-label for="islandPictures">
         <ion-button class="img-button" color="primary" type="button">1</ion-button>
-        <input style="display: none;" type="file" [(ngModel)]="islandPicture" (change)="selectedFile($event, 1)">
+        <input style="display: none;" type="file" [(ngModel)]="islandPicture1" (change)="selectedFile($event, 1)">
       </ion-label>
       <ion-label for="islandPictures">
         <ion-button class="img-button" color="primary" type="button">2</ion-button>
-        <input style="display: none;" type="file" [(ngModel)]="islandPicture" (change)="selectedFile($event, 2)">
+        <input style="display: none;" type="file" [(ngModel)]="islandPicture2" (change)="selectedFile($event, 2)">
       </ion-label>
       <ion-label for="islandPictures">
         <ion-button class="img-button" color="primary" type="button">2</ion-button>
-        <input style="display: none;" type="file" [(ngModel)]="islandPicture" (change)="selectedFile($event, 2)">
+        <input style="display: none;" type="file" [(ngModel)]="islandPictur3" (change)="selectedFile($event, 2)">
       </ion-label>
    </ion-item><br>
 

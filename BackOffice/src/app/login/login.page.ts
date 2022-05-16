@@ -35,7 +35,7 @@ export class LoginPage implements OnInit {
         setStorage('id', response['id']);
         setStorage('username', response['username']);
         setStorage('email', response['email']);
-        this.router.navigate(['/user'])
+        this.router.navigate([`/user/${response['username']}`])
 
         } else {
           document.getElementById("pass-input").nextElementSibling.innerHTML = "Username or password are incorrect!";

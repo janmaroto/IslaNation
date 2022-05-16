@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -24,5 +24,12 @@ export class ApiService {
     console.log(data.key);
     console.log(data.value);
     return this.http.get('http://islanation.local/island' + data.key + data.value);
+  }
+  getCountriesList() {
+    return this.http.get('https://restcountries.com/v3.1/all');
+  }
+  editIsland(data, x_api_key) {
+    let headers = new HttpHeaders().set('x-api-key', x_api_key);
+    return this.http.put('http://islanation.local/island', data, {headers: headers});
   }
 }

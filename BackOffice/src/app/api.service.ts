@@ -32,4 +32,8 @@ export class ApiService {
     let headers = new HttpHeaders().set('x-api-key', x_api_key);
     return this.http.put('http://islanation.local/island', data, {headers: headers});
   }
+  deleteIsland(data, x_api_key) {
+    let headers = new HttpHeaders().set('x-api-key', x_api_key);
+    return this.http.delete('http://islanation.local/island' + data.island, {headers: headers});
+  }
 }

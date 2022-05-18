@@ -1,11 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>island</ion-title>
+    <ion-title *ngIf="island!=null">{{island.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <div *ngIf="mode=='edit'" id="edit-view">
+  <div *ngIf="mode=='edit' && island!=null" id="edit-view">
     <ion-label for="islandName">Island Name:</ion-label><br>
     <ion-input [(ngModel)]="islandName" type="text"></ion-input><br><br>
 
@@ -22,22 +23,22 @@
     <ion-label for="islandSurface">Surface Area (H):</ion-label><br>
     <ion-input [(ngModel)]="islandSurface" type="text"></ion-input><br><br>
     
-    <ion-label for="islandPopulation">Population</ion-label><br>
-    <ion-input [(ngModel)]="islandPopulation" type="text"></ion-input><br><br>
+    <ion-label for="islandPop">Population</ion-label><br>
+    <ion-input [(ngModel)]="islandPop" type="text"></ion-input><br><br>
   
     <span id="cust-label">Images </span>
     <ion-item>
-      <ion-label for="islandPictures">
+      <ion-label for="islandImg">
         <ion-button class="img-button" color="primary" type="button">1</ion-button>
-        <input style="display: none;" type="file" [(ngModel)]="islandPicture1" (change)="selectedFile($event, 1)">
+        <input style="display: none;" type="file" [(ngModel)]="islandImg[0]" (change)="selectedFile($event, 1)">
       </ion-label>
-      <ion-label for="islandPictures">
+      <ion-label for="islandImg">
         <ion-button class="img-button" color="primary" type="button">2</ion-button>
-        <input style="display: none;" type="file" [(ngModel)]="islandPicture2" (change)="selectedFile($event, 2)">
+        <input style="display: none;" type="file" [(ngModel)]="islandImg[1]" (change)="selectedFile($event, 2)">
       </ion-label>
-      <ion-label for="islandPictures">
+      <ion-label for="islandImg">
         <ion-button class="img-button" color="primary" type="button">2</ion-button>
-        <input style="display: none;" type="file" [(ngModel)]="islandPictur3" (change)="selectedFile($event, 2)">
+        <input style="display: none;" type="file" [(ngModel)]="islandImg[2]" (change)="selectedFile($event, 2)">
       </ion-label>
    </ion-item><br>
 
@@ -51,20 +52,15 @@
 
 
 
-  <div *ngIf="mode=='detail'"  id="detail-view">
-    <ion-card *ngIf="island!=null" class="ion-card-list">
-      <img src="../../assets/img/pics/{{island.image}}" style="width: 100%;"/>
-      <ion-card-header>
-        <ion-card-title>{{island.name}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        
+  <div  *ngIf="mode=='detail' && island!=null"  id="detail-view">
+      <img src="../../assets/img/pics/{{island.images[0]}}" style="width: 100%;"/>
         <div id="island-content">
-          <p>{{island.description}}</p>
-          <!-- <ion-button size="small" color="success" (click)="showIsland(island.id, 'edit')">Edit</ion-button> -->
+          <p><b>Description:</b> {{island.description}}</p>
+          <p><b>Country:</b> {{island.country}}</p>
+          <p><b>Population:</b> {{island.population}}</p>
+          <p><b>Surface:</b> {{island.surface}}</p>
+          <p><b>Coords, longitude / latitude:</b> {{island.longitude}} / {{island.latitude}}</p>
         </div>
   
-      </ion-card-content>
-    </ion-card>
   </div>
 </ion-content>

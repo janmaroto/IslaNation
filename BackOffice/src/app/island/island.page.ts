@@ -15,9 +15,7 @@ export class IslandPage implements OnInit {
   islandCountry;
   islandSurface;
   islandPop;
-  islandImage1;
-  islandImage2;
-  islandImage3;
+  islandImg;
 
   islandId;
 
@@ -37,17 +35,20 @@ export class IslandPage implements OnInit {
     this.mode = this.route.snapshot.paramMap.get("mode");
 
     if (this.mode == 'detail') {
-      this.getIslandData();
+
     } else if (this.mode == 'edit') {
 
     }
-    
-    this.getCountriesList();
 
+    // this.islandImg = [];
     
+    this.getIslandData();
+    this.getCountriesList();
 
     // console.log(this.island);
     console.log(this.mode);
+
+    
 
   }
 
@@ -61,9 +62,21 @@ export class IslandPage implements OnInit {
       console.log(data);
       this._apiService.showFilteredIslands(data).subscribe((response) => {
         this.island = response[0];
-        this.island.image = JSON.parse(this.island.images)[0];
+        this.island.images = JSON.parse(this.island.images);
+
+        this.islandName = this.island.name;
+        this.islandDesc = this.island.description;
+        this.islandCountry = this.island.country;
+        this.islandSurface = this.island.surface;
+        this.islandPop = this.island.population;
+        this.islandImg[0] = this.island.images[0];
+        this.islandImg[1] = this.island.images[1];
+        this.islandImg[2] = this.island.images[2];
+
         console.log(this.island);
-        console.log(this.island.images);
+        console.log(this.islandImg);
+
+
       });
   }
   getCountriesList() {
@@ -83,9 +96,7 @@ export class IslandPage implements OnInit {
     data.append("islandDesc", this.islandDesc);
     data.append("islandCountry", this.islandCountry);
     data.append("islandSurface", this.islandSurface);
-    data.append("islandImage1", this.islandImage1);
-    data.append("islandImage2", this.islandImage2);
-    data.append("islandImage3", this.islandImage3);
+    data.append("islandImg", this.islandImg);
 
     console.log(data);
 
@@ -96,11 +107,20 @@ export class IslandPage implements OnInit {
       console.log(response);
     });
   }
-  
-  deleteIsland() {
-    
-  }
-  
+  async deleteIsland() {
+    var data = new FormData();
+
+    data.append("island", this.islandId);
+
+    console.log(data);
+
+    let x_api_key = await getStorage('uuid');
+
+
+    this._apiService.deleteIsland(data, x_api_key).subscribe((response) => {
+      console.log(response);
+    });
+  }  
 
   ngOnInit() {
   }

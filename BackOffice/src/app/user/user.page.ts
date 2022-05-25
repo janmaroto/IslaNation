@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { getStorage } from 'src/services/storage';
+import { removeStorage } from 'src/services/storage';
 import { ApiService } from 'src/app/api.service';
 import { Router } from '@angular/router';
 
@@ -33,6 +34,13 @@ export class UserPage {
     console.log(this.username);
 
     this.showIslands();
+   }
+   logOut() {
+    removeStorage('uuid');
+    removeStorage('id');
+    removeStorage('username');
+    removeStorage('email');
+    this.router.navigate([`/home`])
    }
    showIslands() {
       

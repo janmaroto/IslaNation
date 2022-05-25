@@ -15,7 +15,9 @@ export class IslandPage implements OnInit {
   islandCountry;
   islandSurface;
   islandPop;
-  islandImg;
+  islandImg1;
+  islandImg2;
+  islandImg3;
 
   islandId;
 
@@ -51,6 +53,12 @@ export class IslandPage implements OnInit {
     
 
   }
+  
+  selectedFile(event, img){
+    if (img = 1) this.islandImg1 = event.target.files[0];
+    if (img = 2) this.islandImg2 = event.target.files[0];
+    if (img = 3) this.islandImg3 = event.target.files[0];
+  }
 
   getIslandData() {
       
@@ -69,13 +77,11 @@ export class IslandPage implements OnInit {
         this.islandCountry = this.island.country;
         this.islandSurface = this.island.surface;
         this.islandPop = this.island.population;
-        this.islandImg[0] = this.island.images[0];
-        this.islandImg[1] = this.island.images[1];
-        this.islandImg[2] = this.island.images[2];
+        // this.islandImg1 = this.island.images[0];
+        // this.islandImg2 = this.island.images[1];
+        // this.islandImg3 = this.island.images[2];
 
         console.log(this.island);
-        console.log(this.islandImg);
-
 
       });
   }
@@ -91,12 +97,13 @@ export class IslandPage implements OnInit {
     var data = new FormData();
 
     data.append("islandId", this.islandId);
-
     data.append("islandName", this.islandName);
     data.append("islandDesc", this.islandDesc);
     data.append("islandCountry", this.islandCountry);
     data.append("islandSurface", this.islandSurface);
-    data.append("islandImg", this.islandImg);
+    data.append("islandImg1", this.islandImg1);
+    data.append("islandImg2", this.islandImg2);
+    data.append("islandImg3", this.islandImg3);
 
     console.log(data);
 
